@@ -1,8 +1,4 @@
 
-Chandru
-Attachments
-14:57 (0 minutes ago)
-to me
 
 const canvas = document.querySelector("canvas"),
 toolBtns = document.querySelectorAll(".tool"),
