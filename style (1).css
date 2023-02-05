@@ -1,0 +1,112 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+*{
+  margin: 5;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+body{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40vh;
+  background: #bbb;
+}
+.container{
+  display: flex;
+  width: 100%;
+  gap: 10px;
+  padding: 10px;
+  max-width: 2050px;
+}
+.row{
+  height: 50%;
+  width: 100%;
+  border: 1px solid gray;
+  overflow: hidden;
+  overflow-y:scroll ;
+}
+section{
+  background: #fff;
+  border-radius: 20px;
+  padding: 10px;
+}
+.tools-board{
+  width: 180px;
+  padding: 42px 42px 0;
+}
+.tools-board .row{
+  margin-bottom: 20px;
+}
+.row .options{
+  list-style: none;
+  margin: 10px 0 0 24px;
+}
+.row .options .option{
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.tools-board .row1{
+  margin-bottom: 20px;
+}
+.row1 .options{
+  list-style: none;
+  margin: 10px 0 0 24px;
+}
+.row1 .options .option{
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.tools-board.rowbuttons{
+  margin-bottom: 20px;
+}
+.option:is(:hover, .active) img{
+  filter: invert(17%) sepia(90%) saturate(3000%) hue-rotate(900deg) brightness(100%) contrast(100%);
+}
+.option :where(span, label){
+  color: #5A6168;
+  cursor: pointer;
+  padding-left: 10px;
+}
+.option:is(:hover, .active) :where(span, label){
+  color: #4A98F7;
+}
+.rowbuttons button{
+  width: 100%;
+  color: #fff;
+  border: none;
+  outline: none;
+  padding: 7px 0;
+  font-size: 0.9rem;
+  margin-bottom: 13px;
+  background: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.rowbuttons .clear-canvas{
+  color: #6C757D;
+  border: 1px solid #6C757D;
+  transition: all 0.3s ease;
+}
+.clear-canvas:hover{
+  color: #fff;
+  background: #6C757D;
+}
+.rowbuttons .save-img{
+  background: #4A98F7;
+  border: 1px solid #4A98F7;
+}
+.drawing-board{
+  flex: 1;
+  overflow: hidden;
+}
+.drawing-board canvas{
+  width: 100%;
+  height: 100%;
+}
+
