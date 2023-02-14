@@ -14,71 +14,71 @@
         <div class="row">
           <label class="title">Toolbar</label>
           <ul class="options">
-            <li class="option tool" id="rectangle">
+            <li class="option tool" id="rectangle" draggable="true" ondragstart="dragStart(event)" ondragover="dragOver(event)" ondrop="drop(event)">
               <img src="icons/rectangular.png" alt="">
             </li>
 
-            <li class="option tool" id="curved rectangle">
+            <li class="option tool" id="curved rectangle" draggable="true" ondragstart="dragStart(event)" ondragover="dragOver(event)" ondrop="drop(event)">
               <img src="icons/roundedrectangle.png" alt="">
             </li>
 
-            <li class="option tool" id="oval">
+            <li class="option tool" id="oval" draggable="true" ondragstart="dragStart(event)" ondragover="dragOver(event)" ondrop="drop(event)">
               <img src="icons/oval.png" alt="">
             </li>
 
-            <li class="option tool" id="square">
+            <li class="option tool" id="square"draggable="true" ondragstart="dragStart(event)" ondragover="dragOver(event)" ondrop="drop(event)">
               <img src="icons/square.png" alt="">
             </li>
 
-            <li class="option tool" id="circle">
+            <li class="option tool" id="circle"draggable="true" ondragstart="dragStart(event)" ondragover="dragOver(event)" ondrop="drop(event)">
               <img src="icons/circle.png" alt="">
             </li>
 
-            <li class="option tool" id="diamond">
+            <li class="option tool" id="diamond"draggable="true" ondragstart="dragStart(event)" ondragover="dragOver(event)" ondrop="drop(event)">
               <img src="icons/diamond.png" alt="">
             </li>
 
-            <li class="option tool" id="hexogan">
+            <li class="option tool" id="hexogan"draggable="true" ondragstart="dragStart(event)" ondragover="dragOver(event)" ondrop="drop(event)">
               <img src="icons/hexogan.png" alt="">
             </li>
 
-            <li class="option tool" id="pentagon">
+            <li class="option tool" id="pentagon"draggable="true" ondragstart="dragStart(event)" ondragover="dragOver(event)" ondrop="drop(event)">
               <img src="icons/pentagon.png" alt="">
             </li>
 
-            <li class="option tool" id="triangle">
+            <li class="option tool" id="triangle" draggable="true" ondragstart="dragStart(event)" ondragover="dragOver(event)" ondrop="drop(event)">
               <img src="icons/triangle.png" alt="">
             </li>
 
-            <li class="option tool" id="cylinder">
+            <li class="option tool" id="cylinder" draggable="true" ondragstart="dragStart(event)" ondragover="dragOver(event)" ondrop="drop(event)">
               <img src="icons/cylinder.png" alt="">
             </li>
 
-            <li class="option tool" id="dottedline">
+            <li class="option tool" id="dottedline" draggable="true" ondragstart="dragStart(event)" ondragover="dragOver(event)" ondrop="drop(event)">
               <img src="icons/dottedline.png" alt="">
             </li>
 
-            <li class="option tool" id="bolddottedline">
+            <li class="option tool" id="bolddottedline" draggable="true" ondragstart="dragStart(event)" ondragover="dragOver(event)" ondrop="drop(event)">
               <img src="icons/bolddottedline.png" alt="">
             </li>
 
-            <li class="option tool" id="uparrow">
+            <li class="option tool" id="uparrow" draggable="true" ondragstart="dragStart(event)" ondragover="dragOver(event)" ondrop="drop(event)">
               <img src="icons/uparrow.png" alt="">
             </li>
 
-            <li class="option tool" id="downarrow">
+            <li class="option tool" id="downarrow" draggable="true" ondragstart="dragStart(event)" ondragover="dragOver(event)" ondrop="drop(event)">
               <img src="icons/downarrow.png" alt="">
             </li>
 
-            <li class="option tool" id="leftarrow">
+            <li class="option tool" id="leftarrow" draggable="true" ondragstart="dragStart(event)" ondragover="dragOver(event)" ondrop="drop(event)">
               <img src="icons/leftarrow.png" alt="">
             </li>
 
-            <li class="option tool" id="rightarrow">
+            <li class="option tool" id="rightarrow" draggable="true" ondragstart="dragStart(event)" ondragover="dragOver(event)" ondrop="drop(event)">
               <img src="icons/rightarrow.png" alt="">
             </li>
 
-            <li class="option tool" id="diagonalarrow">
+            <li class="option tool" id="diagonalarrow" draggable="true" ondragstart="dragStart(event)" ondragover="dragOver(event)" ondrop="drop(event)">
               <img src="icons/diagonalarrow.png" alt="">
             </li>
           </ul>
@@ -86,7 +86,7 @@
         <div class="row1">
           <label class="title">Options</label>
           <ul class="options">
-            <li class="option active tool" id="brush">
+            <li class="option active tool" id="write">
               <img src="icons/brush.svg" alt="">
               <span>Write</span>
             </li>
@@ -98,6 +98,54 @@
       </section>
       <section class="drawing-board">
         <canvas></canvas>
+        <script>
+          var width =window.innerWidth;
+          var height=window.innerHeight;
+
+          var stage=new canva.Stage({
+            cotainer:'canvas',
+            width:width,
+            height:height,
+          });
+
+          var layer =new canva.Layer();
+          stage.add(layer);
+
+          var textNode = new canva.Text({
+            x:50,
+            y:50,
+            fontSize:15,
+          });
+
+          layer.add(textNode);
+
+          textNode.on('dblclick dbltap', ()=> {
+            var textPosition=textNode.getAbsolutePosition();
+            var stageBox = stage.cotainer().getBoundingClienRect();
+            var areaPosition ={
+              x:stageBox.left+textPosition.x,
+              y:stageBox.top+textPosition.y,
+            };
+
+            var textarea=document.createElement('textarea');
+            document.body.appendChild(textarea);
+
+            textarea.value=textNode.text();
+            textarea.style.position='absolute';
+            textarea.style.top=areaPosition.y+ 'px';
+            textarea.style.left=areaPosition.x+ 'px';
+            textarea.style.width=textNode.width();
+
+            textarea.focus();
+            textarea.addEventListener('keydown',function(e){
+              if(e.keyCode===13){
+                textNode.text(textarea.value);
+                document.body.removeChild(textarea);
+              }
+            });
+          });
+
+        </script>
       </section>
     </div>
     
